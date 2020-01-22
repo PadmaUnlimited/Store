@@ -3,7 +3,7 @@
 Plugin Name: Padma Store
 Plugin URI: https://www.padmaunlimited.com/plugins/store
 Description: Ecommerce Blocks for Padma Unlimited
-Version: 1.0.2
+Version: 1.0.3
 Author: Padma Unlimited team
 Author URI: https://www.padmaunlimited.com
 License: GNU GPL v2
@@ -31,9 +31,12 @@ add_action('after_setup_theme', function() {
 
 	foreach ($blocks as $file => $class) {
 			
-		$block_type_url = substr(WP_PLUGIN_URL . '/' . str_replace(basename(__FILE__), '', plugin_basename(__FILE__)), 0, -1);		
+		$block_type_url = substr(WP_PLUGIN_URL . '/' . str_replace(basename(__FILE__), '', plugin_basename(__FILE__)), 0, -1);
 		$class_file = __DIR__ . '/blocks/'.$file.'/'.$file.'.php';
-		$icons = __DIR__;
+		$icons = array(
+			'path' => __DIR__ . '/blocks/' . $file . '/',
+			'url' => $block_type_url . '/blocks/' . $file . '/'
+		);
 
 		padma_register_block(
 			$class,
